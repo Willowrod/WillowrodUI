@@ -79,9 +79,9 @@ public extension View {
         }
     }
 
-    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
-        clipShape( RoundedCorner(radius: radius, corners: corners) )
-    }
+//    func cornerRadius(_ radius: CGFloat, corners: UIRectCorner) -> some View {
+//        clipShape( RoundedCorner(radius: radius, corners: corners) )
+//    }
 
 //    func readSize(onChange: @escaping (CGSize) -> Void) -> some View {
 //      background(
@@ -100,22 +100,22 @@ public extension View {
 //        }
 //    }
     
-    func snapshot() -> UIImage? {
-        let controller = NoInsetHostingView(rootView: self)
-        controller.fix()
-        guard let view = controller.view else {
-            return nil
-        }
-          let targetSize = controller.view.intrinsicContentSize
-          view.bounds = CGRect(origin: .zero, size: targetSize)
-          view.backgroundColor = .clear
-
-          let renderer = UIGraphicsImageRenderer(size: targetSize)
-
-          return renderer.image { _ in
-              view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
-          }
-     }
+//    func snapshot() -> UIImage? {
+//        let controller = NoInsetHostingView(rootView: self)
+//        controller.fix()
+//        guard let view = controller.view else {
+//            return nil
+//        }
+//          let targetSize = controller.view.intrinsicContentSize
+//          view.bounds = CGRect(origin: .zero, size: targetSize)
+//          view.backgroundColor = .clear
+//
+//          let renderer = UIGraphicsImageRenderer(size: targetSize)
+//
+//          return renderer.image { _ in
+//              view.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
+//          }
+//     }
     
 //    func onRotate(perform action: @escaping (UIDeviceOrientation) -> Void) -> some View {
 //        self.modifier(DeviceRotationViewModifier(action: action))
@@ -123,46 +123,46 @@ public extension View {
     
 }
 
-private struct SizePreferenceKey: @preconcurrency PreferenceKey {
-    @MainActor static var defaultValue: CGSize = .zero
-    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
-  }
+//private struct SizePreferenceKey: @preconcurrency PreferenceKey {
+//    @MainActor static var defaultValue: CGSize = .zero
+//    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {}
+//  }
 
-public struct RoundedCorner: InsettableShape {
-    var radius: CGFloat = .infinity
-    var corners: UIRectCorner = .allCorners
-    var insetAmount = 3.0
-    public func path(in rect: CGRect) -> Path {
-        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        return Path(path.cgPath)
-    }
-    public func inset(by amount: CGFloat) -> some InsettableShape {
-        var arc = self
-        arc.insetAmount += amount
-        return arc
-    }
-}
-
-class NoInsetHostingView<Content: View>: UIHostingController<Content> {
-    func fix(){
-        guard let _class = view?.classForCoder else { return }
-        let sAI: @convention(block) (AnyObject) -> UIEdgeInsets = { (sself : AnyObject!) -> UIEdgeInsets in
-            return .zero
-        }
-        guard let method = class_getInstanceMethod(_class.self, #selector(getter: UIView.safeAreaInsets)) else { return }
-        class_replaceMethod(_class, #selector(getter: UIView.safeAreaInsets), imp_implementationWithBlock(sAI), method_getTypeEncoding(method))
-        
-        let sALG: @convention(block) (AnyObject) -> UILayoutGuide? = { (sself : AnyObject!) -> UILayoutGuide? in
-            return nil
-        }
-        
-        guard let method2 = class_getInstanceMethod(_class.self, #selector(getter: UIView.safeAreaLayoutGuide)) else { return }
-        class_replaceMethod(_class, #selector(getter: UIView.safeAreaLayoutGuide), imp_implementationWithBlock(sALG), method_getTypeEncoding(method2))
-        
-        
-    }
-    
-    override var prefersStatusBarHidden: Bool {
-        return true
-    }
-}
+//public struct RoundedCorner: InsettableShape {
+//    var radius: CGFloat = .infinity
+//    var corners: UIRectCorner = .allCorners
+//    var insetAmount = 3.0
+//    public func path(in rect: CGRect) -> Path {
+//        let path = UIBezierPath(roundedRect: rect, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
+//        return Path(path.cgPath)
+//    }
+//    public func inset(by amount: CGFloat) -> some InsettableShape {
+//        var arc = self
+//        arc.insetAmount += amount
+//        return arc
+//    }
+//}
+//
+//class NoInsetHostingView<Content: View>: UIHostingController<Content> {
+//    func fix(){
+//        guard let _class = view?.classForCoder else { return }
+//        let sAI: @convention(block) (AnyObject) -> UIEdgeInsets = { (sself : AnyObject!) -> UIEdgeInsets in
+//            return .zero
+//        }
+//        guard let method = class_getInstanceMethod(_class.self, #selector(getter: UIView.safeAreaInsets)) else { return }
+//        class_replaceMethod(_class, #selector(getter: UIView.safeAreaInsets), imp_implementationWithBlock(sAI), method_getTypeEncoding(method))
+//        
+//        let sALG: @convention(block) (AnyObject) -> UILayoutGuide? = { (sself : AnyObject!) -> UILayoutGuide? in
+//            return nil
+//        }
+//        
+//        guard let method2 = class_getInstanceMethod(_class.self, #selector(getter: UIView.safeAreaLayoutGuide)) else { return }
+//        class_replaceMethod(_class, #selector(getter: UIView.safeAreaLayoutGuide), imp_implementationWithBlock(sALG), method_getTypeEncoding(method2))
+//        
+//        
+//    }
+//    
+//    override var prefersStatusBarHidden: Bool {
+//        return true
+//    }
+//}
