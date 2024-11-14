@@ -8,17 +8,38 @@
 import Foundation
 import SwiftUI
 
-//public struct OverlayView<Content: View>: View {
-//    public init(content: Content) {
-//        self.content = content
-//    }
-//    @ViewBuilder var content: Content
-//    public var body: some View {
-//        VStack{
-//            content
-//        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center).padding(10).background(Color.clear)
-//    }
-//}
+struct WillowrodOverlayCardView<Content: View>: View {
+    @ViewBuilder var content: Content
+    public var body: some View {
+        WillowrodOverlayView{
+            WillowrodCardView{
+                content
+            }
+        }
+    }
+}
+
+struct WillowrodOverlayView<Content: View>: View {
+    @ViewBuilder var content: Content
+    public var body: some View {
+        VStack{
+            content
+        }.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center).padding(10).background(.clear)
+    }
+}
+
+struct WillowrodCardView<Content: View>: View {
+    @ViewBuilder var content: Content
+    
+    public var body: some View {
+        ZStack {
+            content
+        }.background(colourWhite).clipShape(RoundedRectangle(cornerRadius: 10)).shadow(radius: 2)
+        
+    }
+}
+
+
 //
 //public struct OverlayBoxView<Content: View>: View {
 //    public init(content: Content) {
@@ -36,19 +57,6 @@ import SwiftUI
 //
 //
 //
-//public struct OverlayCardView<Content: View>: View {
-//    public init(content: Content) {
-//        self.content = content
-//    }
-//    @ViewBuilder var content: Content
-//    public var body: some View {
-//        OverlayView(content:
-//                        CardView(content:
-//                    content
-//            )
-//        )
-//    }
-//}
 //
 //#Preview{
 //    ZStack{
