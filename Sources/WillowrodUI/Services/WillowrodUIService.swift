@@ -18,11 +18,11 @@ class WillowrodUIService {
 
 public func closeableOverlay(content: any View) {
     WillowrodUIService.instance.overlay = WillowrodOverlayCardView {
-            ZStack(alignment: .topTrailing){
-                AnyView(content)
+        VStack(alignment: .trailing){
                 Button(action: {WillowrodUIService.instance.overlay = nil}){
-                    Image(systemName: "xmark.circle").resizable().scaledToFit().frame(width: 30, height: 30).foregroundColor(colourRed)
+                    Image(systemName: "xmark.circle").resizable().scaledToFit().frame(width: 20, height: 20).foregroundColor(colourRed)
                 }.shadow(radius: 2)
+                AnyView(content)
             }.padding(10)
         }
 }

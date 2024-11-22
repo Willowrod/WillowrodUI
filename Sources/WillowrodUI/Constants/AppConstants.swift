@@ -8,10 +8,10 @@
 
 import SwiftUI
 
-//var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
-//let isiPad = idiom == .pad
-//let idealPopupWidth = isiPad ? 500.0 : .infinity
-//let idealFieldWidth = isiPad ? 600.0 : .infinity
+var idiom : UIUserInterfaceIdiom { UIDevice.current.userInterfaceIdiom }
+public let isiPad = idiom == .pad
+public let idealPopupWidth = isiPad ? 500.0 : .infinity
+public let idealFieldWidth = isiPad ? 600.0 : .infinity
 public let apiDateFormat = "yyyy-MM-dd'T'HHmmss"
 public let apiDateColonsFormat = "yyyy-MM-dd'T'HH:mm:ss"
 public let isoDateFormat = "yyyy-MM-dd"
