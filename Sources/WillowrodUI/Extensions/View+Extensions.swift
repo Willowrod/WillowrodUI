@@ -33,7 +33,8 @@ public extension View {
 //            return AnyView(self)
 //        }
 //    }
-    
+ 
+#if os(iOS)
     func dismisskeyboard() -> some View {
         if #available(iOS 16.0, *) {
             return AnyView(self.scrollDismissesKeyboard(.interactively))
@@ -58,7 +59,7 @@ public extension View {
             return AnyView(self.keyboardType(UIKeyboardType.emailAddress))
         }
     }
-
+#endif
     func tappable(_ action: (() -> Void)?) -> some View {
         if let action {
             return AnyView(self.onTapGesture {

@@ -15,7 +15,10 @@ import SwiftUI
 @Observable
 public class SessionService {
     public static let shared = SessionService()
+    
+#if os(iOS)
     public var isPortrait: Bool = UIDevice.current.orientation.isPortrait
+#endif
     public var screenWidth: CGFloat = 0
     public var screenHeight: CGFloat = 0
 }

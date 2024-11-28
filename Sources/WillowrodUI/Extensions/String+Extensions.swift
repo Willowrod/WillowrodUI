@@ -7,7 +7,6 @@
 
 
 import Foundation
-import UIKit
 import SwiftUI
 import CoreImage.CIFilterBuiltins
 
@@ -17,12 +16,13 @@ public extension String {
         return Data(self.utf8).base64EncodedString()
     }
     
-    func imageFromBase64() -> UIImage? {
-        if let data = Data(base64Encoded: self) {
-            return UIImage(data: data)
-        }
-        return nil
-    }
+//    func imageFromBase64() -> CGImage? {
+//        if let data = Data(base64Encoded: self) {
+//            return CGImage(data: data)
+//            //return UIImage(data: data)
+//        }
+//        return nil
+//    }
     
     func fromBase64() -> String {
         if let data = Data(base64Encoded: self) {
@@ -129,12 +129,12 @@ public extension String {
         return self
     }
     
-    func toQRCode() -> UIImage? {
+    func toQRCode() -> CGImage? {
 
         let filter = CIFilter.qrCodeGenerator()
         filter.message = Data(self.utf8)
         if let outputImage = filter.outputImage, let cgImage = CIContext().createCGImage(outputImage, from: outputImage.extent) {
-                return UIImage(cgImage: cgImage)
+            return cgImage
             }
 
         return nil

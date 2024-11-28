@@ -14,6 +14,7 @@ import SwiftUI
  *
  */
 
+#if os(iOS)
 public struct TitledTextField: View {
     public init(title: String, value: Binding<String>, error: String? = nil, hint: String = "", protected: Bool = false, autoCapitalised: TextInputAutocapitalization = .never, keyboardType: KeyboardType = .text, textContextType: UITextContentType? = nil, actionX: ( () -> Void)? = nil, isSecured: Bool = false, editing: Bool = false, editAction: @escaping (String) -> Void = {_ in }) {
         self.title = title
@@ -347,3 +348,5 @@ public struct TitledTextField_Previews: PreviewProvider {
         }.frame(maxWidth: .infinity).background(Color.white)
     }
 }
+
+#endif
