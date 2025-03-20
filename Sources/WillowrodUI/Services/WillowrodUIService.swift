@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 @Observable
-class WillowrodUIService {
-    static let instance = WillowrodUIService()
+public class WillowrodUIService {
+    public static let instance = WillowrodUIService()
     var overlay: (any View)? = nil
     var alert: (any View)? = nil
     var showSpinner = false
