@@ -39,6 +39,30 @@ struct WillowrodCardView<Content: View>: View {
     }
 }
 
+//
+//func closeableOverlay(content: any View) {
+//        SessionService.shared.overlay = WillowrodOverlayCardView {
+//            ZStack(alignment: .topTrailing){
+//                AnyView(content)
+//                Button(action: {AppViewsService.shared.overlay = nil}){
+//                    Image(systemName: "xmark.circle").resizable().scaledToFit().frame(width: 44, height: 44).foregroundColor(.red)
+//                }.shadow(radius: 2)
+//            }.padding(10)
+//        }
+//}
+//
+//func fullScreenOverlay(content: any View) {
+//        AppViewsService.shared.overlay = OverlayCardView {
+//                AnyView(content)
+//            }.padding(10).frame(maxWidth: .infinity, maxHeight: .infinity)
+//        }
+//
+//func mainOverlay(content: any View) {
+//        AppViewsService.shared.overlay = OverlayCardView {
+//                AnyView(content)
+//        }
+//}
+
 
 //
 //public struct OverlayBoxView<Content: View>: View {

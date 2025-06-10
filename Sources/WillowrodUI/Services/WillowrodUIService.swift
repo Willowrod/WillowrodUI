@@ -12,31 +12,58 @@ import SwiftUI
 public class WillowrodUIService {
     public static let instance = WillowrodUIService()
     var overlay: (any View)? = nil
+    var overlayStack: [(any View)] = []
     var alert: (any View)? = nil
     var showSpinner = false
+    
+    func addOverlay(_ newOverlay: (any View)) {
+        if let overlay {
+            self.overlayStack.append(overlay)
+        }
+        overlay = newOverlay
+    }
+    
+    func restoreOverlay(_ animated: Bool = true) {
+        if overlayStack.isEmpty {
+            overlay = nil
+        } else {
+            overlay = overlayStack.removeLast()
+        }
+    }
+    
+    func emptyOverlay() {
+        overlayStack.removeAll()
+        overlay = nil
+    }
 }
 
 public func closeableOverlay(content: any View) {
-    WillowrodUIService.instance.overlay = WillowrodOverlayCardView {
+    let service = WillowrodUIService.instance
+    service.addOverlay(WillowrodOverlayCardView {
         VStack(alignment: .trailing){
-                Button(action: {WillowrodUIService.instance.overlay = nil}){
+            Button(action: {service.restoreOverlay()}){
                     Image(systemName: "xmark.circle").resizable().scaledToFit().frame(width: 20, height: 20).foregroundColor(colourRed)
                 }.shadow(radius: 2)
                 AnyView(content)
             }.padding(10)
-        }
+        })
 }
 
 public func overlay(content: any View) {
-    WillowrodUIService.instance.overlay = WillowrodOverlayCardView {
+    let service = WillowrodUIService.instance
+    service.addOverlay(WillowrodOverlayCardView {
             ZStack(alignment: .topTrailing){
                 AnyView(content)
             }.padding(10)
-        }
+        })
 }
 
 public func hideOverlay() {
-    WillowrodUIService.instance.overlay = nil
+    WillowrodUIService.instance.restoreOverlay()
+}
+
+public func clearOverlay() {
+    WillowrodUIService.instance.emptyOverlay()
 }
 
 public func clearAlert() {

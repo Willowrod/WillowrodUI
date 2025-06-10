@@ -22,17 +22,23 @@ public struct MainButton: View {
         self.width = width
         self.enabled = enabled
         self.action = action
+        self.height = height
+        self.fullWidth = fullWidth
     }
     
    public var body: some View {
-        ZStack(alignment: .center) {
-            HeaderText(text, size: 12).padding(10)
-        }.if(width != nil){$0.frame(width: width)}
+        HStack(alignment: .center) {
+            HeaderText(text, size: 20).padding(10)
+        }
+          .if(width != nil){$0.frame(width: width)}
+           .if(fullWidth){
+               $0.frame(maxWidth: .infinity)
+           }
            .border(Color.black, width: 1)
            .if(enabled){
             $0.tappable{
                 action()
-        }
+            }
            }
            .if(!enabled){
                $0.background(.gray)
