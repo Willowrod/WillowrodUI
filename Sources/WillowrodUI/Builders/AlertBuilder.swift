@@ -71,7 +71,6 @@ public class AlertBuilder {
         
         public func ok (width: CGFloat = 120) -> Builder {
             self.buttons.append(AlertComponent(type: .PositiveButton, text: "OK", order: order(), size: width){
-                print("Alert clearing")
                 clearAlert()
             })
             return self

@@ -16,14 +16,19 @@ public class WillowrodUIService {
     var alert: (any View)? = nil
     var showSpinner = false
     
-    func addOverlay(_ newOverlay: (any View)) {
+    public func addOverlay(_ newOverlay: (any View)) {
         if let overlay {
             self.overlayStack.append(overlay)
         }
         overlay = newOverlay
     }
     
-    func restoreOverlay(_ animated: Bool = true) {
+    public func changeOverlay(_ newOverlay: (any View)) {
+        overlayStack.removeAll()
+        overlay = newOverlay
+    }
+    
+    public func restoreOverlay(_ animated: Bool = true) {
         if overlayStack.isEmpty {
             overlay = nil
         } else {

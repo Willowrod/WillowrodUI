@@ -18,7 +18,7 @@ public struct BaseContentView<Content: View>: View {
     public var body: some View {
         
         GeometryReader{proxy in
-            ZStack{
+            ZStack(alignment: .center){
                 content
                 if let overlay = wrdService.overlay {
                     ZStack{
@@ -33,7 +33,7 @@ public struct BaseContentView<Content: View>: View {
                         AnyView(alert)
                     }.frame(maxWidth: .infinity, maxHeight: .infinity).background(shim)
                 }
-            }.background(background).task(id: proxy.size) {
+            }.frame(maxWidth: .infinity, maxHeight: .infinity).background(background).task(id: proxy.size) {
                 SessionService.shared.screenWidth = proxy.size.width
                 SessionService.shared.screenHeight = proxy.size.height
             }

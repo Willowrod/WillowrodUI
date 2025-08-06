@@ -48,6 +48,30 @@ public struct MainButton: View {
     
 }
    
+public struct MessageButton: View {
+    let text: String
+    var colour: Color = Color("Clear")
+    var textColour: Color = Color("Black")
+    let action: () -> Void
+    
+    public init(_ text: String, colour: Color = Color("Clear"), textColour: Color = Color("Black"), action: @escaping () -> Void) {
+        self.text = text
+        self.action = action
+    }
+    
+   public var body: some View {
+        HStack(alignment: .center) {
+            HeaderText(text, size: 14, colour: .black).padding(2)
+        }.frame(maxWidth: .infinity)
+           .background(.white)
+         .border(Color.black, width: 1)
+         .tappable{
+                action()
+         }
+         .contentShape(Rectangle())
+    }
+    
+}
 
 public struct PositiveButton: View {
    public init(text: String, fullWidth: Bool, height: CGFloat = 44, width: CGFloat? = nil, enabled: Bool = true, action: @escaping () -> Void) {

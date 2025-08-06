@@ -67,4 +67,8 @@ public extension View {
     func fill(_ alignment: Alignment = .center) -> some View{
         return AnyView(self.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: alignment))
     }
+    
+    func fillWidth(_ alignment: Alignment = .center) -> some View{
+        return AnyView(self.frame(minWidth: 0, maxWidth: .infinity, alignment: alignment))
+    }
 }
